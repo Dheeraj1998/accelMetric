@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,11 +25,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accelerometerSensor, gyroscopeSensor, rotationSensor;
     private float df_value0 = 0, df_value1 = 0, df_value2 = 0, value0, value1, value2, diff0, diff1, diff2;
     private boolean calibrate = false;
+    private RelativeLayout currentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        currentLayout = findViewById(R.id.main_layout);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -98,10 +103,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         df_value1 = value1;
         df_value2 = value2;
 
-        calibrate = true;
-    }
+        calibrate = !calibrate;
 
-    public void stopSensor(View view) {
-        calibrate = false;
+        Button sensorControl = findViewById(R.id.sensorBtn);
+
+        if(sensorControl.getText().equals("CALIBRATE")) {
+            sensorControl.setText("STOP");
+            currentLayout.setBackgroundResource(R.color.colorBackground1);
+        }
+
+        else {
+            sensorControl.setText("CALIBRATE");
+            currentLayout.setBackgroundResource(R.color.colorBackground);
+        }
     }
 }
