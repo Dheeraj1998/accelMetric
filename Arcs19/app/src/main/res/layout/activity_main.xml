@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/gradient_green"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -12,8 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CALIBRATE"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
         android:onClick="calibrateSensor"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/gradient_button_green"
         android:layout_centerVertical="true"/>
 
 </RelativeLayout>
